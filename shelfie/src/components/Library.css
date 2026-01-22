@@ -1,0 +1,43 @@
+.library {
+  margin-top: 32px;
+}
+
+.library-title {
+  color: var(--text-primary);
+  margin: 0 0 24px;
+  font-size: 24px;
+}
+
+.book-count {
+  color: var(--text-secondary);
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
+}
+
+.library-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.library-empty h2 {
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.library-empty p {
+  margin: 0;
+  max-width: 400px;
+  margin-inline: auto;
+}
