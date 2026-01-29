@@ -76,12 +76,6 @@ function App() {
       </header>
 
       <main className="main">
-        <SearchBar
-          onSearch={handleSearch}
-          onISBNSubmit={handleISBNLookup}
-          onScanClick={() => setShowScanner(true)}
-        />
-
         {notification && (
           <div className={`notification ${notification.type}`}>
             {notification.message}
@@ -98,6 +92,12 @@ function App() {
         <Bookshelf3D 
           books={books} 
           onRemove={remove} 
+          onScanClick={() => setShowScanner(true)}
+        />
+
+        <SearchBar
+          onSearch={handleSearch}
+          onISBNSubmit={handleISBNLookup}
           onScanClick={() => setShowScanner(true)}
         />
       </main>

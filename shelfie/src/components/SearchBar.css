@@ -1,5 +1,12 @@
 .search-bar {
-  margin-bottom: 24px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-primary);
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-color);
+  z-index: 100;
 }
 
 .search-modes {
