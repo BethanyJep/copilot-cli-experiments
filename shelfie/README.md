@@ -3,7 +3,6 @@
 A beautiful 3D virtual bookshelf app to catalog and display your personal book library. Built with React, Three.js, and the Open Library API.
 
 ![Shelfie Screenshot](./screenshots/bookshelf-main.png)
-<!-- TODO: Add screenshot of the main bookshelf view -->
 
 ## ✨ Features
 
@@ -46,7 +45,6 @@ The app will be available at `http://localhost:5173`
 3. **Scan Barcode** - Click the scan button to use your camera
 
 ![Search Results](./screenshots/search-results.png)
-<!-- TODO: Add screenshot of search results -->
 
 ### Managing Your Library
 
@@ -55,7 +53,6 @@ The app will be available at `http://localhost:5173`
 - **Orbit controls** - Click and drag to rotate the bookshelf view
 
 ![Book Details](./screenshots/book-details.png)
-<!-- TODO: Add screenshot of book details modal -->
 
 ## 🛠️ Tech Stack
 
@@ -93,12 +90,10 @@ shelfie/
 | Main Bookshelf | Arrange Mode |
 |----------------|--------------|
 | ![Main View](./screenshots/bookshelf-main.png) | ![Arrange Mode](./screenshots/arrange-mode.png) |
-<!-- TODO: Add actual screenshots -->
 
 | Book Details | Barcode Scanner |
 |--------------|-----------------|
 | ![Details](./screenshots/book-details.png) | ![Scanner](./screenshots/barcode-scanner.png) |
-<!-- TODO: Add actual screenshots -->
 
 ## 📜 Scripts
 
