@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure OpenAI Fine-Tuning Cost Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧮 Azure OpenAI Fine-Tuning Cost Calculator</h1>
+            <p class="subtitle">Estimate training, hosting, and inference costs for Azure OpenAI fine-tuned models</p>
+            <p class="pricing-note">
+                ⚠️ Always verify current pricing at 
+                <a href="https://azure.microsoft.com/en-us/pricing/details/azure-openai/" target="_blank" rel="noopener">Azure OpenAI Pricing</a>
+                and review 
+                <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/fine-tuning-cost-management?view=foundry-classic" target="_blank" rel="noopener">Cost Management Guidance</a>
+            </p>
+        </header>
+
+        <main>
+            <!-- Model Selection -->
+            <section class="card">
+                <h2>📊 Model & Configuration</h2>
+                <div class="form-group">
+                    <label for="model">Select Model:</label>
+                    <select id="model">
+                        <optgroup label="GPT-4.1 Series">
+                            <option value="gpt-4.1">GPT-4.1</option>
+                            <option value="gpt-4.1-mini">GPT-4.1-mini</option>
+                            <option value="gpt-4.1-nano">GPT-4.1-nano</option>
+                        </optgroup>
+                        <optgroup label="GPT-4o Series">
+                            <option value="gpt-4o" selected>GPT-4o-2024-08-06</option>
+                            <option value="gpt-4o-mini">GPT-4o-mini</option>
+                        </optgroup>
+                        <optgroup label="Reinforcement Fine-Tuning">
+                            <option value="o4-mini-rft">o4-mini (RFT)</option>
+                        </optgroup>
+                        <optgroup label="Legacy">
+                            <option value="gpt-35-turbo">GPT-3.5-Turbo (16K)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="trainingTier">Training Tier:</label>
+                    <select id="trainingTier">
+                        <option value="regional">Regional (Standard)</option>
+                        <option value="global" selected>Global (10-30% discount)</option>
+                        <option value="developer">Developer (50% discount, spot capacity)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="deploymentType">Deployment Type:</label>
+                    <select id="deploymentType">
+                        <option value="standard" selected>Standard (Regional)</option>
+                        <option value="globalStandard">Global Standard</option>
+                        <option value="ptu">Provisioned Throughput (PTU)</option>
+                        <option value="developer">Developer Tier (No hosting fee, 24h limit)</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Training Costs -->
+            <section class="card">
+                <h2>🎓 Training Costs</h2>
+                
+                <div class="form-group">
+                    <label for="trainingType">Training Type:</label>
+                    <select id="trainingType">
+                        <option value="sft" selected>Supervised Fine-Tuning (SFT/DPO)</option>
+                        <option value="rft">Reinforcement Fine-Tuning (RFT)</option>
+                    </select>
+                </div>
+
+                <div id="sftSection">
+                    <h3>3.1 Supervised Fine-Tuning (SFT/DPO)</h3>
+                    <p class="formula">training_cost = (training_tokens / 1,000,000) × epochs × training_price_per_million_tokens</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trainingTokens">Training Tokens (millions):</label>
+                            <input type="number" id="trainingTokens" value="1" min="0" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="epochs">Epochs:</label>
+                            <input type="number" id="epochs" value="2" min="1" max="100">
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <strong>Tip:</strong> Use <a href="https://github.com/openai/tiktoken" target="_blank">tiktoken</a> to count tokens, or estimate ~4 tokens per word.
+                    </div>
+                </div>
+
+                <div id="rftSection" style="display: none;">
+                    <h3>3.2 Reinforcement Fine-Tuning (RFT)</h3>
+                    <p class="formula">training_cost = (training_hours × rft_hourly_rate) + (grader_tokens_M × (grader_input_cost + grader_output_cost) / 2)</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="trainingHours">Training Hours:</label>
+                            <input type="number" id="trainingHours" value="4" min="0" step="0.25">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="useModelGrader">
+                            Use Model Grader (additional cost)
+                        </label>
+                    </div>
+                    
+                    <div id="graderSection" style="display: none;">
+                        <div class="form-group">
+                            <label for="graderModel">Grader Model:</label>
+                            <select id="graderModel">
+                                <option value="gpt-4o">GPT-4o</option>
+                                <option value="o3-mini" selected>o3-mini</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="graderTokens">Total Grader Tokens (millions):</label>
+                            <input type="number" id="graderTokens" value="10" min="0" step="0.1">
+                            <small>Combined input + output tokens for grading</small>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box warning">
+                        <strong>Note:</strong> RFT jobs are capped at $5,000. Training pauses at this limit and creates a checkpoint.
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <span class="label">Estimated Training Cost:</span>
+                    <span class="value" id="trainingCost">$0.00</span>
+                </div>
+            </section>
+
+            <!-- Hosting Costs -->
+            <section class="card">
+                <h2>🖥️ Hosting Costs</h2>
+                
+                <div id="standardHostingSection">
+                    <p class="formula">Standard/Global Standard: $1.70/hour hosting fee</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hostingHoursPerDay">Hours per Day:</label>
+                            <input type="number" id="hostingHoursPerDay" value="24" min="0" max="24" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="hostingDaysPerMonth">Days per Month:</label>
+                            <input type="number" id="hostingDaysPerMonth" value="30" min="1" max="31">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ptuHostingSection" style="display: none;">
+                    <p class="formula">PTU: Fixed capacity with predictable costs</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ptuCount">Number of PTUs:</label>
+                            <input type="number" id="ptuCount" value="50" min="15" step="1">
+                            <small>Minimum varies by model (15-50 PTUs)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="ptuPricing">PTU Pricing:</label>
+                            <select id="ptuPricing">
+                                <option value="hourly">Hourly (Pay-as-you-go)</option>
+                                <option value="monthly">Monthly Reservation</option>
+                                <option value="yearly">Yearly Reservation</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="developerHostingSection" style="display: none;">
+                    <div class="info-box">
+                        <strong>Developer Tier:</strong> No hosting fee, but deployments auto-delete after 24 hours. Best for proof-of-concept and evaluation.
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <span class="label">Estimated Monthly Hosting Cost:</span>
+                    <span class="value" id="hostingCost">$0.00</span>
+                </div>
+            </section>
+
+            <!-- Inference Costs -->
+            <section class="card">
+                <h2>💬 Inference Costs (Monthly)</h2>
+                <p class="formula">Formula: (Input Tokens × Input Price) + (Output Tokens × Output Price)</p>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="inputTokensPerMonth">Input Tokens per Month (millions):</label>
+                        <input type="number" id="inputTokensPerMonth" value="20" min="0" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="outputTokensPerMonth">Output Tokens per Month (millions):</label>
+                        <input type="number" id="outputTokensPerMonth" value="40" min="0" step="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="useCachedInput">
+                        Use Cached Input Pricing (where available)
+                    </label>
+                </div>
+
+                <div class="result-box">
+                    <span class="label">Estimated Monthly Inference Cost:</span>
+                    <span class="value" id="inferenceCost">$0.00</span>
+                </div>
+            </section>
+
+            <!-- Total Summary -->
+            <section class="card summary">
+                <h2>📋 Cost Summary</h2>
+                
+                <table class="summary-table">
+                    <tr>
+                        <td>Training (one-time)</td>
+                        <td id="summaryTraining">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Hosting (monthly)</td>
+                        <td id="summaryHosting">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td>Inference (monthly)</td>
+                        <td id="summaryInference">$0.00</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td>First Month Total</td>
+                        <td id="summaryFirstMonth">$0.00</td>
+                    </tr>
+                    <tr class="recurring-row">
+                        <td>Recurring Monthly Cost</td>
+                        <td id="summaryRecurring">$0.00</td>
+                    </tr>
+                </table>
+
+                <div class="info-box">
+                    <strong>Disclaimer:</strong> These are estimates only. Actual costs may vary. Always verify with the 
+                    <a href="https://azure.microsoft.com/en-us/pricing/details/azure-openai/" target="_blank">official Azure pricing page</a>.
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Built for Azure OpenAI cost estimation • <a href="https://azure.microsoft.com/en-us/pricing/details/azure-openai/" target="_blank">Azure Pricing</a> • <a href="https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/fine-tuning-cost-management" target="_blank">Cost Management Guide</a></p>
+            <p class="last-updated">Pricing data structure last updated: February 2026</p>
+        </footer>
+    </div>
+
+    <script src="pricing.js"></script>
+    <script src="calculator.js"></script>
+</body>
+</html>
