@@ -1,0 +1,59 @@
+{
+  "standard": {
+    "label": "Kawaida (Standard Order)",
+    "order": {
+      "priority": "normal",
+      "notes": "Standard processing. Validate item availability, apply standard catalog pricing in KES, and confirm quantities. Note VAT is 16% in Kenya."
+    },
+    "delivery": {
+      "speed": "standard",
+      "notes": "Offer standard delivery via G4S, Posta Kenya, or Wells Fargo Kenya. Estimate 2-5 business days within Nairobi; 3-7 days upcountry. Suggest free delivery threshold at KES 5,000+."
+    },
+    "payment": {
+      "urgency": "normal",
+      "notes": "Accept M-Pesa, Airtel Money, bank cards (Equity, KCB, Co-op), and cash on delivery (COD). Apply standard promo codes and loyalty points. All amounts in KES."
+    },
+    "dispatch": {
+      "priority": "normal",
+      "notes": "Route from nearest warehouse (Nairobi CBD, Industrial Area, or Mombasa). Standard packaging. Batch with other orders where efficient. Use G4S or DHL Kenya for last-mile."
+    }
+  },
+  "express": {
+    "label": "Haraka (Express Order)",
+    "order": {
+      "priority": "high",
+      "notes": "Priority processing. Verify real-time stock levels. Flag items with limited availability. Reserve inventory immediately. Apply express surcharge in KES."
+    },
+    "delivery": {
+      "speed": "express",
+      "notes": "Offer same-day (Nairobi only) or next-day delivery via DHL Express Kenya or Sendy. Validate county/estate for same-day eligibility. Check rider cutoff times (3 PM for same-day)."
+    },
+    "payment": {
+      "urgency": "high",
+      "notes": "Prioritize instant payment: M-Pesa STK Push, Equity Jenga POS, or bank cards. Apply express surcharge. Enhanced fraud screening for orders above KES 50,000."
+    },
+    "dispatch": {
+      "priority": "high",
+      "notes": "Route to warehouse closest to delivery county. Priority picking and packing. Use dedicated Sendy or Glovo courier for same-day Nairobi drops. Confirm rider assignment before dispatch."
+    }
+  },
+  "subscription": {
+    "label": "Kujiunga (Subscription Order)",
+    "order": {
+      "priority": "scheduled",
+      "notes": "Validate recurring item availability. Check subscription tier benefits. Apply subscriber discounts (10-20% off). Manage item substitution preferences for seasonal Kenyan products."
+    },
+    "delivery": {
+      "speed": "scheduled",
+      "notes": "Use preferred delivery schedule (weekly/bi-weekly/monthly). Optimize for customer's county/estate. Coordinate with G4S or Posta Kenya scheduled routes. Bundle with other subscription items."
+    },
+    "payment": {
+      "urgency": "scheduled",
+      "notes": "Use stored M-Pesa standing order or saved card. Apply subscriber discounts. Handle failed M-Pesa payment with automatic retry (2 attempts). Pro-rate partial subscription periods. All amounts in KES."
+    },
+    "dispatch": {
+      "priority": "scheduled",
+      "notes": "Pre-pick subscription items 2 days ahead of ship date. Coordinate with scheduled delivery route. Use subscription-specific packaging with branding. Include loyalty reward inserts for Kenyan subscribers."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Retail Agent{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🛒 Retail Agent</h1>
+        <p class="subtitle">Multi-Agent Order Processor — Powered by Microsoft Agent Framework</p>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>Built with <a href="https://github.com/BethanyJep/writing-editor">writing-editor</a> architecture pattern</p>
+    </footer>
+</body>
+</html>

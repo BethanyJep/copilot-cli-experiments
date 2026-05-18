@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block title %}Duka Agent — Process Order (Kenya){% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="input-section">
+        <h2>📦 Order Details</h2>
+        <form id="order-form">
+            <div class="form-group">
+                <label for="order-type">Order Type:</label>
+                <select id="order-type" name="order_type">
+                    {% for key, label in order_types.items() %}
+                    <option value="{{ key }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="order-details">Order Details:</label>
+                <textarea id="order-details" name="order_details" rows="12"
+                    placeholder="Enter order details here...&#10;&#10;Mfano (Example):&#10;Customer: Wanjiru Kamau, wanjiru@gmail.com, +254 712 345 678&#10;Delivery Address: Westlands, Nairobi, Kenya&#10;Items:&#10;  - 2x Wireless Bluetooth Earbuds (KES 3,500 each)&#10;  - 1x USB-C Charging Cable (KES 650)&#10;Payment: M-Pesa (0712345678)&#10;Promo Code: SAVE10"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="submit-btn">🚀 Process Order</button>
+                <button type="button" id="sample-btn" class="secondary">📋 Load Sample</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="results-section" id="results" style="display: none;">
+        <h2>📋 Order Processing Results</h2>
+        <div id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processing order through 4 specialist agents…</p>
+        </div>
+
+        <div id="results-content" style="display: none;">
+            <!-- Flags -->
+            <div class="result-card" id="flags-card">
+                <h3>🚦 Order Flags</h3>
+                <div id="flags-list"></div>
+            </div>
+
+            <!-- Agent Results -->
+            <div class="result-card" id="agents-card">
+                <h3>🤖 Agent Analysis (Refined)</h3>
+                <div id="agent-results"></div>
+            </div>
+
+            <!-- Unified Plan -->
+            <div class="result-card" id="plan-card">
+                <h3>📋 Unified Order Plan</h3>
+                <div id="unified-plan"></div>
+            </div>
+
+            <!-- Comments -->
+            <div class="result-card" id="comments-card">
+                <h3>💬 Operational Comments</h3>
+                <div id="comments-list"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+const SAMPLES = {
+    standard: `Customer: Wanjiru Kamau, wanjiru.kamau@gmail.com, +254 712 345 678
+Delivery Address: Westlands, Nairobi, Kenya
+Items:
+  - 2x Wireless Bluetooth Earbuds (KES 3,500 each)
+  - 1x USB-C Charging Cable (KES 650)
+  - 1x Laptop Cooling Stand (KES 2,200)
+Payment: M-Pesa (0712345678)
+Promo Code: SAVE10`,
+    express: `Customer: Jomo Otieno, jomo.otieno@gmail.com, +254 733 987 654
+Delivery Address: Nyali, Mombasa, Kenya
+Items:
+  - 1x Samsung 4K Smart TV 55" (KES 85,000)
+  - 1x HDMI Cable 2.1 (KES 1,200)
+  - 1x Universal TV Wall Mount (KES 3,500)
+Payment: Equity Bank Card ending in 7891
+Notes: Gift wrap requested, must arrive before Saturday`,
+    subscription: `Customer: Akinyi Odhiambo, akinyi@outlook.com, +254 722 654 321
+Delivery Address: Milimani, Kisumu, Kenya
+Items:
+  - Monthly Tea Subscription - Kericho Gold Premium Blend (500g)
+  - Add-on: Kenyan Organic Coffee Pack (250g)
+Frequency: Monthly (next shipment: May 1)
+Payment: Stored M-Pesa Till Number 123456
+Subscriber since: January 2025
+Loyalty Points: 2,400`
+};
+
+document.getElementById('sample-btn').addEventListener('click', () => {
+    const orderType = document.getElementById('order-type').value;
+    document.getElementById('order-details').value = SAMPLES[orderType] || SAMPLES.standard;
+});
+
+document.getElementById('order-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const orderDetails = document.getElementById('order-details').value.trim();
+    const orderType = document.getElementById('order-type').value;
+
+    if (!orderDetails) { alert('Please enter order details.'); return; }
+
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('loading').style.display = 'flex';
+    document.getElementById('results-content').style.display = 'none';
+    document.getElementById('submit-btn').disabled = true;
+
+    try {
+        const resp = await fetch('/process', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ order_details: orderDetails, order_type: orderType }),
+        });
+        const data = await resp.json();
+
+        if (data.error) { alert('Error: ' + data.error); return; }
+
+        renderResults(data);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('results-content').style.display = 'block';
+    } catch (err) {
+        alert('Request failed: ' + err.message);
+    } finally {
+        document.getElementById('submit-btn').disabled = false;
+    }
+});
+
+function renderResults(data) {
+    // Flags
+    const flagsEl = document.getElementById('flags-list');
+    const flags = data.annotations?.flags || [];
+    if (flags.length === 0) {
+        flagsEl.innerHTML = '<p class="info">✅ No flags raised — order looks good!</p>';
+    } else {
+        flagsEl.innerHTML = flags.map(f => {
+            const icon = { critical: '🔴', warning: '🟡', info: '🟢' }[f.severity] || '⚪';
+            return `<div class="flag flag-${f.severity}">
+                ${icon} <strong>[${f.severity.toUpperCase()}] ${f.area}</strong>: ${f.description}
+                <span class="agent-tag">${f.agent}</span>
+            </div>`;
+        }).join('');
+    }
+
+    // Agent results
+    const agentEl = document.getElementById('agent-results');
+    agentEl.innerHTML = (data.refined_results || []).map(r => `
+        <div class="agent-result">
+            <h4>${r.agent_name}</h4>
+            <div class="findings">${marked(r.findings)}</div>
+            ${r.suggestions.length ? `<ul class="suggestions">${r.suggestions.map(s => `<li>${s}</li>`).join('')}</ul>` : ''}
+            ${Object.keys(r.cross_references || {}).length ? `
+                <div class="cross-refs">
+                    <strong>Cross-agent:</strong>
+                    ${Object.entries(r.cross_references).map(([a, n]) => `<span class="ref">↔ ${a}: ${n}</span>`).join(' ')}
+                </div>` : ''}
+        </div>
+    `).join('');
+
+    // Unified plan
+    document.getElementById('unified-plan').innerHTML = marked(data.unified_plan || '');
+
+    // Comments
+    const commentsEl = document.getElementById('comments-list');
+    const comments = data.annotations?.comments || [];
+    if (comments.length === 0) {
+        commentsEl.innerHTML = '<p class="info">No additional comments.</p>';
+    } else {
+        commentsEl.innerHTML = comments.map(c => `
+            <div class="comment">
+                <div class="comment-anchor">💬 ${c.anchor}</div>
+                <div class="comment-text">${c.comment}</div>
+                <span class="agent-tag">${c.agent}${c.category ? ` (${c.category})` : ''}</span>
+            </div>
+        `).join('');
+    }
+}
+
+// Simple markdown-like renderer
+function marked(text) {
+    if (!text) return '';
+    return text
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/^### (.+)$/gm, '<h5>$1</h5>')
+        .replace(/^## (.+)$/gm, '<h4>$1</h4>')
+        .replace(/^# (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+        .replace(/\n/g, '<br>');
+}
+</script>
+{% endblock %}

@@ -1,0 +1,9 @@
+name: retail-agent
+defaultEnvironment: dev
+
+environments:
+  dev:
+    projectEndpoint: "${FOUNDRY_PROJECT_ENDPOINT}"
+    agentName: retail-agent
+    azureContainerRegistry: "${ACR_NAME}"
+    testCases: []
