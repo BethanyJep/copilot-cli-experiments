@@ -171,6 +171,32 @@ button.secondary:hover {
     border-bottom: 1px solid var(--border);
 }
 
+/* Logs */
+.log-section {
+    margin-top: 2rem;
+}
+
+.log-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.8rem;
+}
+
+.log-output {
+    min-height: 220px;
+    max-height: 420px;
+    overflow-y: auto;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem;
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
 /* Flags */
 .flag {
     padding: 0.6rem 0.8rem;

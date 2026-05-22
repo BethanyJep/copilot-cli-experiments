@@ -3,8 +3,10 @@
 
 from __future__ import annotations
 
+from collections import deque
 import logging
 import os
+from threading import Lock
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
 
@@ -22,6 +24,53 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+
+MAX_LOG_LINES = 500
+_LOG_BUFFER = deque(maxlen=MAX_LOG_LINES)
+_LOG_LOCK = Lock()
+_LOG_COUNTER = 0
+
+
+class InMemoryLogHandler(logging.Handler):
+    """Capture log lines in memory so the web UI can fetch them."""
+
+    def emit(self, record: logging.LogRecord) -> None:
+        global _LOG_COUNTER
+        try:
+            message = self.format(record)
+        except Exception:
+            message = record.getMessage()
+
+        with _LOG_LOCK:
+            _LOG_COUNTER += 1
+            _LOG_BUFFER.append(
+                {
+                    "id": _LOG_COUNTER,
+                    "level": record.levelname,
+                    "logger": record.name,
+                    "message": message,
+                }
+            )
+
+
+def _setup_log_capture() -> None:
+    """Attach one in-memory handler to root logger for live UI streaming."""
+    root_logger = logging.getLogger()
+    already_attached = any(
+        isinstance(handler, InMemoryLogHandler) for handler in root_logger.handlers
+    )
+    if already_attached:
+        return
+
+    memory_handler = InMemoryLogHandler()
+    memory_handler.setLevel(logging.INFO)
+    memory_handler.setFormatter(
+        logging.Formatter("%(asctime)s | %(levelname)s | %(name)s | %(message)s")
+    )
+    root_logger.addHandler(memory_handler)
+
+
+_setup_log_capture()
 
 ORDER_TYPES = {
     "standard": "Kawaida (Standard Order)",
@@ -67,6 +116,8 @@ def process_order():
         order_details = data.get("order_details", "").strip()
         order_type = data.get("order_type", "standard")
 
+        logger.info("Received order request (type=%s)", order_type)
+
         if not order_details:
             return jsonify({"error": "No order details provided"}), 400
 
@@ -110,6 +161,33 @@ def process_order():
     except Exception as e:
         logger.exception("Error during order processing")
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/logs", methods=["GET"])
+def get_logs():
+    """Return captured logs for live display in the web UI."""
+    since = request.args.get("since", default="0")
+    try:
+        since_id = int(since)
+    except ValueError:
+        since_id = 0
+
+    with _LOG_LOCK:
+        lines = [line for line in _LOG_BUFFER if line["id"] > since_id]
+        last_id = _LOG_COUNTER
+
+    return jsonify({"logs": lines, "last_id": last_id})
+
+
+@app.route("/logs/reset", methods=["POST"])
+def reset_logs():
+    """Clear captured logs so each run starts with a clean log view."""
+    global _LOG_COUNTER
+    with _LOG_LOCK:
+        _LOG_BUFFER.clear()
+        _LOG_COUNTER = 0
+    logger.info("Log buffer reset")
+    return jsonify({"status": "ok"})
 
 
 @app.route("/health")

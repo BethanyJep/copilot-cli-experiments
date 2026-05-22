@@ -62,34 +62,34 @@ class RetailOrchestrator:
         context = OrderContext(order_details=order_details, order_type=order_type)
         start_time = perf_counter()
 
-        print(f"\n🛒 Processing {context.label}…")
+        logger.info("Processing %s", context.label)
 
         # Phase 1 — parallel independent analysis using ConcurrentBuilder
-        print("  Phase 1: Independent agent analysis…")
+        logger.info("Phase 1: Independent agent analysis")
         phase1_start = perf_counter()
         phase1_results = await self._run_parallel_analysis(context)
         phase1_duration = perf_counter() - phase1_start
         for r in phase1_results:
-            print(f"    ✓ {r.summary_line()}")
+            logger.info("Phase 1 result: %s", r.summary_line())
 
         # Phase 2 — team synthesis (each agent refines with awareness of others)
-        print("  Phase 2: Team synthesis…")
+        logger.info("Phase 2: Team synthesis")
         phase2_start = perf_counter()
         phase2_results = await self._run_team_synthesis(phase1_results, context)
         phase2_duration = perf_counter() - phase2_start
         for r in phase2_results:
-            print(f"    ✓ {r.summary_line()} (refined)")
+            logger.info("Phase 2 result: %s (refined)", r.summary_line())
 
         # Phase 3 — unified order plan + annotations
-        print("  Phase 3: Generating unified order plan…")
+        logger.info("Phase 3: Generating unified order plan")
         phase3_start = perf_counter()
         unified = await self._generate_unified_plan(phase2_results, context)
-        print("  Phase 3b: Generating order annotations…")
+        logger.info("Phase 3b: Generating order annotations")
         annotations = await self._generate_annotations(phase2_results, context)
         phase3_duration = perf_counter() - phase3_start
 
         total_duration = perf_counter() - start_time
-        print(f"\n  ✅ Order processing complete in {total_duration:.1f}s")
+        logger.info("Order processing complete in %.1fs", total_duration)
 
         return OrderSynthesis(
             individual_results=phase1_results,

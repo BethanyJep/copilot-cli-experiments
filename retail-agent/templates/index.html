@@ -60,6 +60,16 @@
             </div>
         </div>
     </section>
+
+    <section class="log-section">
+        <h2>🧾 Live Agent Logs</h2>
+        <div class="result-card" id="logs-card">
+            <div class="log-toolbar">
+                <button type="button" id="clear-logs-btn" class="secondary">Clear Logs</button>
+            </div>
+            <pre id="live-logs" class="log-output">Waiting for activity...</pre>
+        </div>
+    </section>
 </div>
 
 <script>
@@ -91,6 +101,52 @@ Subscriber since: January 2025
 Loyalty Points: 2,400`
 };
 
+let logCursor = 0;
+let logPoller = null;
+
+function appendLogLine(line) {
+    const output = document.getElementById('live-logs');
+    const rendered = `[${line.id}] ${line.message}`;
+    if (output.textContent === 'Waiting for activity...') {
+        output.textContent = rendered;
+    } else {
+        output.textContent += `\n${rendered}`;
+    }
+    output.scrollTop = output.scrollHeight;
+}
+
+async function pollLogs() {
+    try {
+        const resp = await fetch(`/logs?since=${logCursor}`);
+        const data = await resp.json();
+        const lines = data.logs || [];
+        lines.forEach(appendLogLine);
+        logCursor = data.last_id || logCursor;
+    } catch (_) {
+        // Keep UI responsive even if log polling fails temporarily.
+    }
+}
+
+function startLogPolling() {
+    if (logPoller) {
+        return;
+    }
+    pollLogs();
+    logPoller = setInterval(pollLogs, 1000);
+}
+
+async function resetServerLogs() {
+    await fetch('/logs/reset', { method: 'POST' });
+    logCursor = 0;
+    document.getElementById('live-logs').textContent = 'Waiting for activity...';
+}
+
+document.getElementById('clear-logs-btn').addEventListener('click', async () => {
+    await resetServerLogs();
+});
+
+startLogPolling();
+
 document.getElementById('sample-btn').addEventListener('click', () => {
     const orderType = document.getElementById('order-type').value;
     document.getElementById('order-details').value = SAMPLES[orderType] || SAMPLES.standard;
@@ -103,6 +159,8 @@ document.getElementById('order-form').addEventListener('submit', async (e) => {
     const orderType = document.getElementById('order-type').value;
 
     if (!orderDetails) { alert('Please enter order details.'); return; }
+
+    await resetServerLogs();
 
     document.getElementById('results').style.display = 'block';
     document.getElementById('loading').style.display = 'flex';
