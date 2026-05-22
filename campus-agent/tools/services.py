@@ -1,7 +1,7 @@
 """Campus services tools – let the agent look up services and registration info."""
 
 import json
-import re
+çimport re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.error import HTTPError, URLError

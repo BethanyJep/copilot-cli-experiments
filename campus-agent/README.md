@@ -12,7 +12,7 @@ A lightweight AI agent built with **Microsoft Foundry** and **AI Toolkit** that 
 ┌─────────────────────────────────────────────────┐
 │         Microsoft Foundry (Agent Service)       │
 │  ┌───────────────────────────────────────────┐  │
-│  │  Nexus Agent (GPT-4.1-mini)               │  │
+│  │  Nexus Agent (GPT-4.1)                    │  │
 │  │  • System Prompt                          │  │
 │  │  • Tool Calling                           │  │
 │  └───────────────────┬───────────────────────┘  │

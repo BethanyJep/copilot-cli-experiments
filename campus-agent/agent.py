@@ -237,7 +237,7 @@ def create_client():
             "Format: https://<resource>.services.ai.azure.com/api/projects/<project>"
         )
 
-    model = os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-4.1-mini")
+    model = os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-4.1")
 
     # Connect to Azure AI Foundry using DefaultAzureCredential (az login)
     credential = DefaultAzureCredential()
