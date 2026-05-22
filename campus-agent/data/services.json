@@ -1,0 +1,79 @@
+{
+  "campus_services": {
+    "library": {
+      "name": "University Library",
+      "location": "Main Campus, Central Building",
+      "hours": "Mon-Fri 7:00 AM - 10:00 PM, Sat 8:00 AM - 6:00 PM, Sun 10:00 AM - 4:00 PM",
+      "services": ["Book borrowing (up to 5 books for 14 days)", "E-resources access", "Group study rooms (book via portal)", "Printing & photocopying (UGX 200/page)", "Research assistance desk"],
+      "contact": "library@university.ac.ug"
+    },
+    "health_center": {
+      "name": "Campus Health Center",
+      "location": "Student Services Building, Ground Floor",
+      "hours": "Mon-Fri 8:00 AM - 5:00 PM (Emergency: 24/7)",
+      "services": ["General consultation (free with student ID)", "Counseling & mental health", "First aid & emergency care", "Health insurance claims processing", "Vaccination programs"],
+      "contact": "health@university.ac.ug | Emergency: 0772-123-456"
+    },
+    "it_helpdesk": {
+      "name": "IT Support & Helpdesk",
+      "location": "ICT Building, Room 101",
+      "hours": "Mon-Fri 8:00 AM - 6:00 PM",
+      "services": ["Wi-Fi setup & password reset", "Student email support", "LMS (Moodle) assistance", "Software licenses (Microsoft 365, MATLAB)", "Lab access cards"],
+      "contact": "ithelpdesk@university.ac.ug | Ext: 2345"
+    },
+    "registrar": {
+      "name": "Academic Registrar's Office",
+      "location": "Administration Block, 2nd Floor",
+      "hours": "Mon-Fri 8:30 AM - 4:30 PM",
+      "services": ["Course registration & add/drop", "Transcript requests (3-5 working days)", "Exam timetables", "Academic calendar", "Graduation clearance"],
+      "contact": "registrar@university.ac.ug"
+    },
+    "career_center": {
+      "name": "Career Services Center",
+      "location": "Student Center, Room 205",
+      "hours": "Mon-Fri 9:00 AM - 5:00 PM",
+      "services": ["CV/Resume review", "Interview preparation", "Internship listings", "Career counseling", "Job fairs (twice per semester)"],
+      "contact": "careers@university.ac.ug"
+    },
+    "student_housing": {
+      "name": "Student Accommodation Office",
+      "location": "Administration Block, 1st Floor",
+      "hours": "Mon-Fri 8:00 AM - 5:00 PM",
+      "services": ["On-campus hall booking", "Off-campus housing listings (hostels)", "Roommate matching", "Maintenance requests", "Move-in/move-out scheduling"],
+      "contact": "housing@university.ac.ug"
+    },
+    "cafeteria": {
+      "name": "Main Campus Cafeteria",
+      "location": "Student Center, Ground Floor",
+      "hours": "Mon-Fri 6:30 AM - 8:00 PM, Sat 7:00 AM - 2:00 PM",
+      "services": ["Breakfast, lunch & dinner", "Meal plan subscriptions (UGX 500,000/semester)", "Special dietary options available", "Catering for events"],
+      "contact": "dining@university.ac.ug"
+    }
+  },
+  "registration": {
+    "process": [
+      "1. Log in to Student Portal (portal.university.ac.ug)",
+      "2. Clear any outstanding fees (minimum 60% payment required)",
+      "3. Select courses for the semester (max 21 credit hours)",
+      "4. Get advisor approval (automatic for courses within your program)",
+      "5. Confirm registration and download provisional timetable",
+      "6. Collect student ID card from Registrar (new students only)"
+    ],
+    "important_dates": {
+      "registration_opens": "2026-07-20",
+      "registration_closes": "2026-08-20",
+      "late_registration": "2026-08-21 to 2026-09-05 (UGX 50,000 late fee)",
+      "add_drop_period": "2026-08-25 to 2026-09-12",
+      "semester_starts": "2026-09-01",
+      "mid_semester_exams": "2026-10-20 to 2026-10-24",
+      "semester_ends": "2026-12-15",
+      "final_exams": "2026-12-01 to 2026-12-12"
+    },
+    "requirements": {
+      "minimum_credits": 12,
+      "maximum_credits": 21,
+      "prerequisite_check": "Automatic - system blocks courses if prerequisites not met",
+      "advisor_approval": "Required for overload (>18 credits) or cross-faculty courses"
+    }
+  }
+}

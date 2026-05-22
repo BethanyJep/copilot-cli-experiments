@@ -1,0 +1,47 @@
+{
+  "tuition": {
+    "BSc Computer Science": {
+      "per_semester": 2850000,
+      "currency": "UGX",
+      "breakdown": {
+        "tuition": 2200000,
+        "lab_fees": 300000,
+        "technology_fee": 150000,
+        "student_activity": 100000,
+        "guild_fees": 100000
+      }
+    },
+    "BA Business Administration": {
+      "per_semester": 2500000,
+      "currency": "UGX",
+      "breakdown": {
+        "tuition": 2000000,
+        "library_fee": 150000,
+        "technology_fee": 150000,
+        "student_activity": 100000,
+        "guild_fees": 100000
+      }
+    }
+  },
+  "payment_deadlines": {
+    "Fall 2026": {
+      "full_payment": "2026-08-15",
+      "installment_1": "2026-08-15",
+      "installment_2": "2026-10-15",
+      "installment_3": "2026-11-30",
+      "late_fee_per_day": 5000
+    }
+  },
+  "payment_methods": [
+    "Mobile Money (MTN MoMo: *165*3# or Airtel Money, Account: Student ID)",
+    "Bank Transfer (Stanbic Bank, Account: 9030012345678)",
+    "Student Portal (card payment)",
+    "Financial Aid Office (scholarship/bursary)"
+  ],
+  "financial_aid": {
+    "merit_scholarship": "Covers up to 50% tuition for CGPA >= 4.0 out of 5.0",
+    "need_based_bursary": "Apply through Dean of Students office by Aug 1",
+    "work_study": "Part-time campus jobs (library, IT helpdesk, admin)",
+    "government_loan": "Apply at highereducation.go.ug - Students' Loan Scheme covers tuition + living expenses"
+  }
+}

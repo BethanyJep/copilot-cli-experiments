@@ -1,0 +1,84 @@
+{
+  "students": {
+    "STU001": {
+      "name": "Aisha Nakamya",
+      "program": "BSc Computer Science",
+      "year": 2,
+      "semester": "Fall 2026",
+      "courses": [
+        {
+          "code": "CS201",
+          "name": "Data Structures & Algorithms",
+          "instructor": "Dr. Ssempijja",
+          "schedule": "Mon/Wed 9:00-10:30 AM",
+          "room": "Science Block B, Room 204",
+          "credits": 4
+        },
+        {
+          "code": "CS205",
+          "name": "Database Systems",
+          "instructor": "Prof. Nabukenya",
+          "schedule": "Tue/Thu 11:00 AM-12:30 PM",
+          "room": "ICT Lab 3",
+          "credits": 3
+        },
+        {
+          "code": "MTH201",
+          "name": "Discrete Mathematics",
+          "instructor": "Dr. Mukasa",
+          "schedule": "Mon/Wed/Fri 2:00-3:00 PM",
+          "room": "Main Hall, Room 101",
+          "credits": 3
+        },
+        {
+          "code": "CS210",
+          "name": "Software Engineering",
+          "instructor": "Dr. Tumusiime",
+          "schedule": "Fri 9:00 AM-12:00 PM",
+          "room": "Engineering Block, Room 305",
+          "credits": 3
+        }
+      ]
+    },
+    "STU002": {
+      "name": "Brian Mugisha",
+      "program": "BA Business Administration",
+      "year": 1,
+      "semester": "Fall 2026",
+      "courses": [
+        {
+          "code": "BUS101",
+          "name": "Principles of Management",
+          "instructor": "Prof. Kiggundu",
+          "schedule": "Mon/Wed 10:00-11:30 AM",
+          "room": "Business School, Room 102",
+          "credits": 3
+        },
+        {
+          "code": "BUS105",
+          "name": "Financial Accounting",
+          "instructor": "Dr. Nabwire",
+          "schedule": "Tue/Thu 9:00-10:30 AM",
+          "room": "Business School, Room 201",
+          "credits": 3
+        },
+        {
+          "code": "ECO101",
+          "name": "Microeconomics",
+          "instructor": "Dr. Katumba",
+          "schedule": "Mon/Wed/Fri 1:00-2:00 PM",
+          "room": "Social Sciences Block, Room 110",
+          "credits": 3
+        },
+        {
+          "code": "COM100",
+          "name": "Communication Skills",
+          "instructor": "Ms. Amongi",
+          "schedule": "Thu 2:00-5:00 PM",
+          "room": "Arts Block, Room 301",
+          "credits": 2
+        }
+      ]
+    }
+  }
+}

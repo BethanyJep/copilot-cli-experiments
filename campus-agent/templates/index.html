@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniBot 🎓 – Campus Assistant</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 UniBot</h1>
+            <p class="subtitle">Your AI Campus Assistant – Built with Microsoft Foundry</p>
+        </header>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="message bot">
+                <div class="message-content">
+                    <strong>UniBot</strong>
+                    <p>Hi there! 👋 I'm UniBot, your campus assistant. I can help you with:</p>
+                    <ul>
+                        <li>📚 Class schedules & timetables</li>
+                        <li>💰 Fees, payments & financial aid</li>
+                        <li>📋 Course registration</li>
+                        <li>🏛️ Campus services (library, health, IT, careers...)</li>
+                    </ul>
+                    <p>Try asking: <em>"What's Aisha's schedule?"</em> or <em>"How do I register for courses?"</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <button onclick="sendQuick('What are today\'s classes for STU001?')">Today's Classes</button>
+            <button onclick="sendQuick('How much are the fees for Computer Science?')">Fee Structure</button>
+            <button onclick="sendQuick('How do I register for courses?')">Registration</button>
+            <button onclick="sendQuick('Tell me about the library')">Library Info</button>
+            <button onclick="sendQuick('What financial aid is available?')">Financial Aid</button>
+            <button onclick="sendQuick('Where is the health center?')">Health Center</button>
+        </div>
+
+        <form id="chatForm" class="input-area">
+            <input type="text" id="userInput" placeholder="Ask me anything about campus life..." autocomplete="off">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chatContainer');
+        const chatForm = document.getElementById('chatForm');
+        const userInput = document.getElementById('userInput');
+
+        function addMessage(text, isUser) {
+            const div = document.createElement('div');
+            div.className = `message ${isUser ? 'user' : 'bot'}`;
+            div.innerHTML = `<div class="message-content"><strong>${isUser ? 'You' : 'UniBot'}</strong><p>${formatMessage(text)}</p></div>`;
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function formatMessage(text) {
+            return text
+                .replace(/\n/g, '<br>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>');
+        }
+
+        function addLoading() {
+            const div = document.createElement('div');
+            div.className = 'message bot loading';
+            div.id = 'loadingMsg';
+            div.innerHTML = '<div class="message-content"><strong>UniBot</strong><p>Thinking... 🤔</p></div>';
+            chatContainer.appendChild(div);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function removeLoading() {
+            const el = document.getElementById('loadingMsg');
+            if (el) el.remove();
+        }
+
+        async function sendMessage(message) {
+            if (!message.trim()) return;
+            addMessage(message, true);
+            userInput.value = '';
+            addLoading();
+
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message })
+                });
+                const data = await res.json();
+                removeLoading();
+                if (data.error) {
+                    addMessage(data.error, false);
+                } else {
+                    addMessage(data.response, false);
+                }
+            } catch (err) {
+                removeLoading();
+                addMessage('Connection error. Please try again.', false);
+            }
+        }
+
+        function sendQuick(msg) {
+            sendMessage(msg);
+        }
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            sendMessage(userInput.value);
+        });
+
+        userInput.focus();
+    </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# deploy.sh — Build, push, and deploy the retail-agent to Azure AI Foundry
+# deploy.sh — Build, push, and deploy the retail-agent to Microsoft Foundry
 set -euo pipefail
 
 # Change to the script's directory so relative paths work
@@ -41,7 +41,7 @@ echo "==> Image pushed: ${FULL_IMAGE}"
 echo ""
 echo "Next steps:"
 echo "  1. Grant your Foundry project managed identity the 'Container Registry Repository Reader' role on the ACR."
-echo "  2. In Azure AI Foundry portal, create a hosted agent with:"
+echo "  2. In Microsoft Foundry portal, create a hosted agent with:"
 echo "       Image:  ${FULL_IMAGE}"
 echo "       Protocol: responses / a2a"
 echo "       Env vars: AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_CHAT_DEPLOYMENT_NAME"
