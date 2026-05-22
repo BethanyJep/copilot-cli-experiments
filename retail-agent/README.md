@@ -166,8 +166,8 @@ The web UI provides a form to enter orders, load samples, and view results with:
 
 ── Order Agent ─────────────────────────────────────────────
   Items validated: 3 items, all in stock
-  Subtotal: $217.97
-  Promo SAVE10 applied: -$21.80
+  Subtotal: UGX 2,875,000
+  Promo SAVE10 applied: -UGX 287,500
 
   Actions:
     1. Reserve inventory for 2x Wireless Headphones
@@ -175,24 +175,24 @@ The web UI provides a form to enter orders, load samples, and view results with:
     3. Confirm item availability in nearest warehouse
 
 ── Delivery Agent ──────────────────────────────────────────
-  Address validated: 123 Main St, Seattle, WA 98101 ✓
+  Address validated: Plot 14, Ntinda Road, Kampala ✓
   Recommended: Standard shipping (5-7 business days)
 
   Actions:
-    1. Offer free standard shipping (order > $100 threshold)
-    2. Present economy ($4.99) and express ($14.99) options
+    1. Offer free standard shipping (order > UGX 150,000 threshold)
+    2. Present economy (UGX 8,000) and express (UGX 25,000) options
 
 ── Payment Agent ───────────────────────────────────────────
-  Payment method: Visa ****4242 — valid
+  Payment method: MTN MoMo 0772****78 — valid
   Fraud risk: LOW
 
   Actions:
-    1. Authorize $196.17 + tax
+    1. Authorize UGX 2,587,500 + VAT
     2. Apply SAVE10 discount
-    3. Calculate state tax for WA
+    3. Calculate 18% VAT for Uganda
 
 ── Dispatch Agent ──────────────────────────────────────────
-  Warehouse: Seattle-WA-01 (all items in stock)
+  Warehouse: Kampala-NTD-01 (all items in stock)
   Estimated dispatch: within 24 hours of payment
 
   Actions:
@@ -203,10 +203,10 @@ The web UI provides a form to enter orders, load samples, and view results with:
 ============================================================
   📋 UNIFIED ORDER PLAN
 ============================================================
-  1. Order Summary: 3 items, $196.17 after 10% promo
-  2. Payment: Authorize Visa, low fraud risk
+  1. Order Summary: 3 items, UGX 2,587,500 after 10% promo
+  2. Payment: Authorize MTN MoMo transaction, low fraud risk
   3. Delivery: Free standard shipping (5-7 days)
-  4. Dispatch: Seattle warehouse, ship within 24h
+  4. Dispatch: Kampala warehouse, ship within 24h
   5. No blockers — ready for dispatch ✅
 ```
 

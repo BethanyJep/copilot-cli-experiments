@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Duka Agent — Process Order (Kenya){% endblock %}
+{% block title %}Duka Agent — Process Order (Uganda){% endblock %}
 
 {% block content %}
 <div class="container">
@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label for="order-details">Order Details:</label>
                 <textarea id="order-details" name="order_details" rows="12"
-                    placeholder="Enter order details here...&#10;&#10;Mfano (Example):&#10;Customer: Wanjiru Kamau, wanjiru@gmail.com, +254 712 345 678&#10;Delivery Address: Westlands, Nairobi, Kenya&#10;Items:&#10;  - 2x Wireless Bluetooth Earbuds (KES 3,500 each)&#10;  - 1x USB-C Charging Cable (KES 650)&#10;Payment: M-Pesa (0712345678)&#10;Promo Code: SAVE10"></textarea>
+                    placeholder="Enter order details here...&#10;&#10;Mfano (Example):&#10;Customer: Amina Namusoke, amina@gmail.com, +256 772 345 678&#10;Delivery Address: Ntinda, Kampala, Uganda&#10;Items:&#10;  - 2x Wireless Bluetooth Earbuds (UGX 95,000 each)&#10;  - 1x USB-C Charging Cable (UGX 25,000)&#10;Payment: MTN MoMo (0772345678)&#10;Promo Code: SAVE10"></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" id="submit-btn">🚀 Process Order</button>
@@ -64,29 +64,29 @@
 
 <script>
 const SAMPLES = {
-    standard: `Customer: Wanjiru Kamau, wanjiru.kamau@gmail.com, +254 712 345 678
-Delivery Address: Westlands, Nairobi, Kenya
+        standard: `Customer: Amina Namusoke, amina.namusoke@gmail.com, +256 772 345 678
+Delivery Address: Ntinda, Kampala, Uganda
 Items:
-  - 2x Wireless Bluetooth Earbuds (KES 3,500 each)
-  - 1x USB-C Charging Cable (KES 650)
-  - 1x Laptop Cooling Stand (KES 2,200)
-Payment: M-Pesa (0712345678)
+    - 2x Wireless Bluetooth Earbuds (UGX 95,000 each)
+    - 1x USB-C Charging Cable (UGX 25,000)
+    - 1x Laptop Cooling Stand (UGX 75,000)
+Payment: MTN MoMo (0772345678)
 Promo Code: SAVE10`,
-    express: `Customer: Jomo Otieno, jomo.otieno@gmail.com, +254 733 987 654
-Delivery Address: Nyali, Mombasa, Kenya
+        express: `Customer: Daniel Okello, daniel.okello@gmail.com, +256 783 987 654
+Delivery Address: Kiwatule, Kampala, Uganda
 Items:
-  - 1x Samsung 4K Smart TV 55" (KES 85,000)
-  - 1x HDMI Cable 2.1 (KES 1,200)
-  - 1x Universal TV Wall Mount (KES 3,500)
-Payment: Equity Bank Card ending in 7891
+    - 1x Samsung 4K Smart TV 55" (UGX 2,850,000)
+    - 1x HDMI Cable 2.1 (UGX 75,000)
+    - 1x Universal TV Wall Mount (UGX 180,000)
+Payment: Stanbic Bank Card ending in 7891
 Notes: Gift wrap requested, must arrive before Saturday`,
-    subscription: `Customer: Akinyi Odhiambo, akinyi@outlook.com, +254 722 654 321
-Delivery Address: Milimani, Kisumu, Kenya
+        subscription: `Customer: Grace Achieng, grace@outlook.com, +256 702 654 321
+Delivery Address: Makindye, Kampala, Uganda
 Items:
-  - Monthly Tea Subscription - Kericho Gold Premium Blend (500g)
-  - Add-on: Kenyan Organic Coffee Pack (250g)
+    - Monthly Tea Subscription - Rwenzori Gold Premium Blend (500g)
+    - Add-on: Ugandan Organic Coffee Pack (250g)
 Frequency: Monthly (next shipment: May 1)
-Payment: Stored M-Pesa Till Number 123456
+Payment: Stored MTN MoMo Merchant Code 123456
 Subscriber since: January 2025
 Loyalty Points: 2,400`
 };

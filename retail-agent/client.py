@@ -23,33 +23,33 @@ ORDER_TYPES = {
 
 SAMPLE_ORDERS = {
     "1": (
-        "Customer: Wanjiru Kamau, wanjiru.kamau@gmail.com, +254 712 345 678\n"
-        "Delivery Address: Westlands, Nairobi, Kenya\n"
+        "Customer: Amina Namusoke, amina.namusoke@gmail.com, +256 772 345 678\n"
+        "Delivery Address: Ntinda, Kampala, Uganda\n"
         "Items:\n"
-        "  - 2x Wireless Bluetooth Earbuds (KES 3,500 each)\n"
-        "  - 1x USB-C Charging Cable (KES 650)\n"
-        "  - 1x Laptop Cooling Stand (KES 2,200)\n"
-        "Payment: M-Pesa (0712345678)\n"
+        "  - 2x Wireless Bluetooth Earbuds (UGX 95,000 each)\n"
+        "  - 1x USB-C Charging Cable (UGX 25,000)\n"
+        "  - 1x Laptop Cooling Stand (UGX 75,000)\n"
+        "Payment: MTN MoMo (0772345678)\n"
         "Promo Code: SAVE10"
     ),
     "2": (
-        "Customer: Jomo Otieno, jomo.otieno@gmail.com, +254 733 987 654\n"
-        "Delivery Address: Nyali, Mombasa, Kenya\n"
+        "Customer: Daniel Okello, daniel.okello@gmail.com, +256 783 987 654\n"
+        "Delivery Address: Kiwatule, Kampala, Uganda\n"
         "Items:\n"
-        "  - 1x Samsung 4K Smart TV 55\" (KES 85,000)\n"
-        "  - 1x HDMI Cable 2.1 (KES 1,200)\n"
-        "  - 1x Universal TV Wall Mount (KES 3,500)\n"
-        "Payment: Equity Bank Card ending in 7891\n"
+        "  - 1x Samsung 4K Smart TV 55\" (UGX 2,850,000)\n"
+        "  - 1x HDMI Cable 2.1 (UGX 75,000)\n"
+        "  - 1x Universal TV Wall Mount (UGX 180,000)\n"
+        "Payment: Stanbic Bank Card ending in 7891\n"
         "Notes: Gift wrap requested, must arrive before Saturday"
     ),
     "3": (
-        "Customer: Akinyi Odhiambo, akinyi@outlook.com, +254 722 654 321\n"
-        "Delivery Address: Milimani, Kisumu, Kenya\n"
+        "Customer: Grace Achieng, grace@outlook.com, +256 702 654 321\n"
+        "Delivery Address: Makindye, Kampala, Uganda\n"
         "Items:\n"
-        "  - Monthly Tea Subscription - Kericho Gold Premium Blend (500g)\n"
-        "  - Add-on: Kenyan Organic Coffee Pack (250g)\n"
+        "  - Monthly Tea Subscription - Rwenzori Gold Premium Blend (500g)\n"
+        "  - Add-on: Ugandan Organic Coffee Pack (250g)\n"
         "Frequency: Monthly (next shipment: May 1)\n"
-        "Payment: Stored M-Pesa Till Number 123456\n"
+        "Payment: Stored MTN MoMo Merchant Code 123456\n"
         "Subscriber since: January 2025\n"
         "Loyalty Points: 2,400"
     ),
@@ -65,9 +65,9 @@ def get_order_details() -> str:
 
     if choice == "1":
         print("\n📋 Select a sample order:")
-        print("  1. Standard retail order (earbuds, cable, laptop stand — Nairobi)")
-        print("  2. Express gift order (Smart TV — Mombasa)")
-        print("  3. Subscription order (monthly Kericho tea — Kisumu)")
+        print("  1. Standard retail order (earbuds, cable, laptop stand — Kampala)")
+        print("  2. Express gift order (Smart TV — Kampala)")
+        print("  3. Subscription order (monthly Rwenzori tea — Kampala)")
         sample = input("\nEnter choice (1/2/3): ").strip()
         order = SAMPLE_ORDERS.get(sample)
         if order:
@@ -139,7 +139,7 @@ def main() -> None:
     orchestrator = RetailOrchestrator(client, model=deployment)
 
     print("=" * 60)
-    print("  🛒  Duka Agent — Multi-Agent Order Processor (Kenya)")
+    print("  🛒  Duka Agent — Multi-Agent Order Processor (Uganda)")
     print("  📦 Powered by Microsoft Agent Framework")
     print("=" * 60)
 

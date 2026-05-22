@@ -3,57 +3,57 @@
     "label": "Kawaida (Standard Order)",
     "order": {
       "priority": "normal",
-      "notes": "Standard processing. Validate item availability, apply standard catalog pricing in KES, and confirm quantities. Note VAT is 16% in Kenya."
+      "notes": "Standard processing. Validate item availability, apply standard catalog pricing in UGX, and confirm quantities. Note VAT is 18% in Uganda."
     },
     "delivery": {
       "speed": "standard",
-      "notes": "Offer standard delivery via G4S, Posta Kenya, or Wells Fargo Kenya. Estimate 2-5 business days within Nairobi; 3-7 days upcountry. Suggest free delivery threshold at KES 5,000+."
+      "notes": "Offer standard delivery via Posta Uganda, DHL Uganda, or regional courier partners. Estimate 1-3 business days within Greater Kampala; 2-5 days upcountry. Suggest free delivery threshold at UGX 150,000+."
     },
     "payment": {
       "urgency": "normal",
-      "notes": "Accept M-Pesa, Airtel Money, bank cards (Equity, KCB, Co-op), and cash on delivery (COD). Apply standard promo codes and loyalty points. All amounts in KES."
+      "notes": "Accept MTN MoMo, Airtel Money, bank cards (Stanbic, Centenary, dfcu, Equity Bank Uganda), and cash on delivery (COD). Apply standard promo codes and loyalty points. All amounts in UGX."
     },
     "dispatch": {
       "priority": "normal",
-      "notes": "Route from nearest warehouse (Nairobi CBD, Industrial Area, or Mombasa). Standard packaging. Batch with other orders where efficient. Use G4S or DHL Kenya for last-mile."
+      "notes": "Route from nearest warehouse (Kampala Central, Namanve, or Mbarara). Standard packaging. Batch with other orders where efficient. Use Posta Uganda or DHL Uganda for last-mile."
     }
   },
   "express": {
     "label": "Haraka (Express Order)",
     "order": {
       "priority": "high",
-      "notes": "Priority processing. Verify real-time stock levels. Flag items with limited availability. Reserve inventory immediately. Apply express surcharge in KES."
+      "notes": "Priority processing. Verify real-time stock levels. Flag items with limited availability. Reserve inventory immediately. Apply express surcharge in UGX."
     },
     "delivery": {
       "speed": "express",
-      "notes": "Offer same-day (Nairobi only) or next-day delivery via DHL Express Kenya or Sendy. Validate county/estate for same-day eligibility. Check rider cutoff times (3 PM for same-day)."
+      "notes": "Offer same-day (Kampala metro only) or next-day delivery via DHL Express Uganda, SafeBoda, or Glovo. Validate district/division for same-day eligibility. Check rider cutoff times (3 PM for same-day)."
     },
     "payment": {
       "urgency": "high",
-      "notes": "Prioritize instant payment: M-Pesa STK Push, Equity Jenga POS, or bank cards. Apply express surcharge. Enhanced fraud screening for orders above KES 50,000."
+      "notes": "Prioritize instant payment: MTN MoMo push, Airtel Money, or bank cards. Apply express surcharge. Enhanced fraud screening for orders above UGX 2,000,000."
     },
     "dispatch": {
       "priority": "high",
-      "notes": "Route to warehouse closest to delivery county. Priority picking and packing. Use dedicated Sendy or Glovo courier for same-day Nairobi drops. Confirm rider assignment before dispatch."
+      "notes": "Route to warehouse closest to delivery district. Priority picking and packing. Use dedicated SafeBoda or Glovo courier for same-day Kampala drops. Confirm rider assignment before dispatch."
     }
   },
   "subscription": {
     "label": "Kujiunga (Subscription Order)",
     "order": {
       "priority": "scheduled",
-      "notes": "Validate recurring item availability. Check subscription tier benefits. Apply subscriber discounts (10-20% off). Manage item substitution preferences for seasonal Kenyan products."
+      "notes": "Validate recurring item availability. Check subscription tier benefits. Apply subscriber discounts (10-20% off). Manage item substitution preferences for seasonal Ugandan products."
     },
     "delivery": {
       "speed": "scheduled",
-      "notes": "Use preferred delivery schedule (weekly/bi-weekly/monthly). Optimize for customer's county/estate. Coordinate with G4S or Posta Kenya scheduled routes. Bundle with other subscription items."
+      "notes": "Use preferred delivery schedule (weekly/bi-weekly/monthly). Optimize for customer's district/division. Coordinate with Posta Uganda or regional courier scheduled routes. Bundle with other subscription items."
     },
     "payment": {
       "urgency": "scheduled",
-      "notes": "Use stored M-Pesa standing order or saved card. Apply subscriber discounts. Handle failed M-Pesa payment with automatic retry (2 attempts). Pro-rate partial subscription periods. All amounts in KES."
+      "notes": "Use stored MTN MoMo standing order, Airtel Money, or saved card. Apply subscriber discounts. Handle failed mobile money payment with automatic retry (2 attempts). Pro-rate partial subscription periods. All amounts in UGX."
     },
     "dispatch": {
       "priority": "scheduled",
-      "notes": "Pre-pick subscription items 2 days ahead of ship date. Coordinate with scheduled delivery route. Use subscription-specific packaging with branding. Include loyalty reward inserts for Kenyan subscribers."
+      "notes": "Pre-pick subscription items 2 days ahead of ship date. Coordinate with scheduled delivery route. Use subscription-specific packaging with branding. Include loyalty reward inserts for Ugandan subscribers."
     }
   }
 }

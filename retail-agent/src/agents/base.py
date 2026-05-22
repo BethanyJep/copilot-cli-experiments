@@ -90,31 +90,31 @@ def create_refinement_agent(
 AGENT_CONFIGS = {
     "Order Agent": {
         "role_description": (
-            "You validate and process incoming orders for a Kenyan e-commerce platform. "
+            "You validate and process incoming orders for a Ugandan e-commerce platform. "
             "You check item availability, verify quantities, apply catalog pricing rules "
-            "in Kenyan Shillings (KES), and ensure VAT (16%) is correctly applied. "
+            "in Ugandan Shillings (UGX), and ensure VAT (18%) is correctly applied. "
             "You flag missing information, out-of-stock items, quantity limits, and "
-            "county-restricted products."
+            "district-restricted products."
         ),
         "get_instructions": lambda context: _get_order_instructions(context),
     },
     "Delivery Agent": {
         "role_description": (
-            "You determine delivery options for customers across Kenya's 47 counties. "
-            "You estimate delivery times based on origin (Nairobi warehouses) and "
-            "destination county, validate delivery addresses and estates, select "
-            "optimal carriers (Sendy, G4S, DHL Kenya, Posta Kenya), and present "
-            "delivery choices. You consider same-day eligibility within Nairobi, "
+            "You determine delivery options for customers across Uganda's districts. "
+            "You estimate delivery times based on origin (Kampala-area warehouses) and "
+            "destination district/division, validate delivery addresses and landmarks, select "
+            "optimal carriers (SafeBoda, Glovo Uganda, DHL Uganda, Posta Uganda), and present "
+            "delivery choices. You consider same-day eligibility within Greater Kampala, "
             "upcountry lead times, and special handling requirements."
         ),
         "get_instructions": lambda context: _get_delivery_instructions(context),
     },
     "Payment Agent": {
         "role_description": (
-            "You handle payment processing for Kenyan customers. "
-            "You validate payment methods including M-Pesa (STK Push, Till Numbers, "
-            "Paybill), Airtel Money, bank cards (Equity, KCB, Co-op, NCBA), and "
-            "cash on delivery (COD). You calculate totals in KES including 16% VAT "
+            "You handle payment processing for Ugandan customers. "
+            "You validate payment methods including MTN MoMo, Airtel Money, "
+            "bank cards (Stanbic, Centenary, dfcu, Equity Bank Uganda), and "
+            "cash on delivery (COD). You calculate totals in UGX including 18% VAT "
             "and applicable discounts, assess fraud signals, apply promo codes, "
             "and ensure transactions can be completed securely."
         ),
@@ -122,12 +122,12 @@ AGENT_CONFIGS = {
     },
     "Dispatch Agent": {
         "role_description": (
-            "You manage order fulfillment and dispatch logistics from Kenyan warehouses. "
-            "You determine which warehouse (Nairobi CBD, Industrial Area, or Mombasa) "
+            "You manage order fulfillment and dispatch logistics from Ugandan warehouses. "
+            "You determine which warehouse (Kampala Central, Namanve, or Mbarara) "
             "should fulfil the order, plan picking and packing operations, coordinate "
-            "with local couriers (Sendy riders, G4S routes), and ensure all prerequisites "
+            "with local couriers (SafeBoda riders, Glovo routes), and ensure all prerequisites "
             "are met before dispatch. You account for upcountry delivery hand-offs "
-            "and Posta Kenya collection points."
+            "and Posta Uganda collection points."
         ),
         "get_instructions": lambda context: _get_dispatch_instructions(context),
     },
