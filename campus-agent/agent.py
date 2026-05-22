@@ -1,5 +1,5 @@
 """
-Campus AI Agent – Built with Azure AI Foundry + AI Toolkit
+Campus AI Agent – Built with Microsoft Foundry + AI Toolkit
 Helps students navigate campus life using tool-calling and prompt engineering.
 """
 
@@ -228,7 +228,7 @@ def execute_tool_call(tool_call) -> str:
 
 
 def create_client():
-    """Connect to Azure AI Foundry and return an OpenAI-compatible client."""
+    """Connect to Microsoft Foundry and return an OpenAI-compatible client."""
 
     project_endpoint = os.getenv("FOUNDRY_PROJECT_ENDPOINT")
     if not project_endpoint:
@@ -239,7 +239,7 @@ def create_client():
 
     model = os.getenv("MODEL_DEPLOYMENT_NAME", "gpt-4.1")
 
-    # Connect to Azure AI Foundry using DefaultAzureCredential (az login)
+    # Connect to Microsoft Foundry using DefaultAzureCredential (az login)
     credential = DefaultAzureCredential()
     project_client = AIProjectClient(
         endpoint=project_endpoint,
@@ -249,7 +249,7 @@ def create_client():
     # Get an OpenAI-compatible client pointed at Foundry
     openai_client = project_client.get_openai_client()
 
-    print(f"✅ Connected to Azure AI Foundry")
+    print(f"✅ Connected to Microsoft Foundry")
     print(f"   Endpoint: {project_endpoint[:50]}...")
     print(f"   Model: {model}")
     print(f"   Tools: {len(TOOLS)} campus tools registered\n")
@@ -331,7 +331,7 @@ def main():
 
     print("=" * 60)
     print("🎓 Nexus – Your Campus Assistant")
-    print("   Built with Azure AI Foundry + AI Toolkit")
+    print("   Built with Microsoft Foundry + AI Toolkit")
     print("=" * 60)
     print("Ask me about class schedules, fees, registration, or campus services!")
     print("Type 'quit' to exit.\n")
