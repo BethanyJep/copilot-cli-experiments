@@ -3,12 +3,24 @@
 import json
 from pathlib import Path
 
+from .services import get_ucu_website_info
+
 DATA_PATH = Path(__file__).parent.parent / "data" / "fees.json"
 
 
 def _load_fees() -> dict:
     with open(DATA_PATH) as f:
         return json.load(f)
+
+
+def _is_website_success(result: str) -> bool:
+    failed_prefixes = (
+        "UCU website request failed",
+        "Unable to reach the UCU website",
+        "Unknown UCU website topic",
+        "Only ucu.ac.ug URLs are allowed",
+    )
+    return not result.startswith(failed_prefixes)
 
 
 def get_fee_structure(program: str) -> str:
@@ -20,6 +32,10 @@ def get_fee_structure(program: str) -> str:
     Returns:
         Detailed fee breakdown for the program.
     """
+    website_result = get_ucu_website_info("fees")
+    if _is_website_success(website_result):
+        return website_result
+
     data = _load_fees()
     fee_info = data["tuition"].get(program)
 
@@ -48,6 +64,10 @@ def get_payment_deadlines(semester: str = "Fall 2026") -> str:
     Returns:
         Payment deadlines and accepted payment methods.
     """
+    website_result = get_ucu_website_info("payment")
+    if _is_website_success(website_result):
+        return website_result
+
     data = _load_fees()
     deadlines = data["payment_deadlines"].get(semester)
 
@@ -75,6 +95,10 @@ def get_financial_aid_info() -> str:
     Returns:
         Details about scholarships, bursaries, work-study, and loans.
     """
+    website_result = get_ucu_website_info("financial_aid")
+    if _is_website_success(website_result):
+        return website_result
+
     data = _load_fees()
     aid = data["financial_aid"]
 

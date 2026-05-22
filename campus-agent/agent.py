@@ -18,6 +18,7 @@ from tools import (
     get_financial_aid_info,
     get_campus_service,
     get_registration_info,
+    get_ucu_website_info,
 )
 
 load_dotenv()
@@ -45,9 +46,11 @@ Your role is to help students navigate campus life efficiently so they can focus
 - **Fees & Payments**: Explain fee structures, deadlines, payment methods, and financial aid
 - **Campus Services**: Provide info about library, health center, IT support, career services, housing, dining
 - **Registration**: Guide students through course registration process, dates, and requirements
+- **Official UCU Website**: Pull current public information from ucu.ac.ug when a question needs official web details
 
 ## Guidelines
 - Always use the appropriate tool to fetch accurate, up-to-date information
+- For services, admissions, fees, payment details, and scholarships, prioritize official UCU website-grounded tools before local demo data
 - When a student asks about fees, always mention financial aid options too
 - For schedule questions, offer to show today's classes or the full timetable
 - If a student seems stressed, acknowledge their feelings and point them to counseling services
@@ -176,6 +179,23 @@ TOOLS = [
             }
         }
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_ucu_website_info",
+            "description": "Fetch official public information from the UCU website for topics like admissions, academics, programmes, international students, contact, or a specific ucu.ac.ug URL.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "topic": {
+                        "type": "string",
+                        "description": "A website topic such as admissions, academics, programmes, postgraduate, international_students, contact, emergency_numbers, about, or a full https://ucu.ac.ug/... URL"
+                    }
+                },
+                "required": ["topic"]
+            }
+        }
+    },
 ]
 
 # Maps function names to their Python implementations
@@ -187,6 +207,7 @@ TOOL_FUNCTIONS = {
     "get_financial_aid_info": get_financial_aid_info,
     "get_campus_service": get_campus_service,
     "get_registration_info": get_registration_info,
+    "get_ucu_website_info": get_ucu_website_info,
 }
 
 
