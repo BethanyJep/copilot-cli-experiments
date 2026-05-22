@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniBot 🎓 – Campus Assistant</title>
+    <title>Nexus 🎓 – Campus Assistant</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎓 UniBot</h1>
+            <h1>🎓 Nexus</h1>
             <p class="subtitle">Your AI Campus Assistant – Built with Microsoft Foundry</p>
         </header>
 
         <div class="chat-container" id="chatContainer">
             <div class="message bot">
                 <div class="message-content">
-                    <strong>UniBot</strong>
-                    <p>Hi there! 👋 I'm UniBot, your campus assistant. I can help you with:</p>
+                    <strong>Nexus</strong>
+                    <p>Hi there! 👋 I'm Nexus, your campus assistant. I can help you with:</p>
                     <ul>
                         <li>📚 Class schedules & timetables</li>
                         <li>💰 Fees, payments & financial aid</li>
@@ -52,7 +52,7 @@
         function addMessage(text, isUser) {
             const div = document.createElement('div');
             div.className = `message ${isUser ? 'user' : 'bot'}`;
-            div.innerHTML = `<div class="message-content"><strong>${isUser ? 'You' : 'UniBot'}</strong><p>${formatMessage(text)}</p></div>`;
+            div.innerHTML = `<div class="message-content"><strong>${isUser ? 'You' : 'Nexus'}</strong><p>${formatMessage(text)}</p></div>`;
             chatContainer.appendChild(div);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
@@ -68,7 +68,7 @@
             const div = document.createElement('div');
             div.className = 'message bot loading';
             div.id = 'loadingMsg';
-            div.innerHTML = '<div class="message-content"><strong>UniBot</strong><p>Thinking... 🤔</p></div>';
+            div.innerHTML = '<div class="message-content"><strong>Nexus</strong><p>Thinking... 🤔</p></div>';
             chatContainer.appendChild(div);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }

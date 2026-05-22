@@ -102,9 +102,9 @@ def reset():
 
 @app.route("/health")
 def health():
-    return jsonify({"status": "healthy", "agent": "UniBot 🎓"})
+    return jsonify({"status": "healthy", "agent": "Nexus 🎓"})
 
 
 if __name__ == "__main__":
-    print("🎓 Starting UniBot Web UI on http://localhost:5001")
+    print("🎓 Starting Nexus Web UI on http://localhost:5001")
     app.run(debug=True, port=5001)

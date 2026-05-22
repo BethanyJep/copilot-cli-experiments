@@ -1,4 +1,4 @@
-# 🎓 UniBot – Campus AI Agent
+# 🎓 Nexus – Campus AI Agent
 
 A lightweight AI agent built with **Microsoft Foundry** and **AI Toolkit** that helps students navigate campus life — from checking class schedules to answering everyday questions about fees, registration, and campus services.
 
@@ -12,7 +12,7 @@ A lightweight AI agent built with **Microsoft Foundry** and **AI Toolkit** that 
 ┌─────────────────────────────────────────────────┐
 │         Microsoft Foundry (Agent Service)       │
 │  ┌───────────────────────────────────────────┐  │
-│  │  UniBot Agent (GPT-4.1-mini)              │  │
+│  │  Nexus Agent (GPT-4.1-mini)               │  │
 │  │  • System Prompt                          │  │
 │  │  • Tool Calling                           │  │
 │  └───────────────────┬───────────────────────┘  │
@@ -95,14 +95,14 @@ The agent has 7 tools it can call to fetch real campus data:
 
 ```
 You: What's Amara's schedule for this semester?
-UniBot: 📚 Here's Amara's full schedule for Fall 2026...
+Nexus: 📚 Here's Amara's full schedule for Fall 2026...
 
 You: How much are the fees for Computer Science?
-UniBot: 💰 The total is KES 85,000 per semester. Here's the breakdown...
+Nexus: 💰 The total is KES 85,000 per semester. Here's the breakdown...
         🎓 Don't forget about financial aid options!
 
 You: How do I register for courses?
-UniBot: 📋 Here's the step-by-step process...
+Nexus: 📋 Here's the step-by-step process...
         📅 Key date: Registration opens July 20, 2026!
 ```
 

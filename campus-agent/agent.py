@@ -22,7 +22,7 @@ from tools import (
 load_dotenv()
 
 # --- System Prompt (Prompt Engineering) ---
-SYSTEM_PROMPT = """You are UniBot 🎓, a friendly and knowledgeable campus assistant for university students.
+SYSTEM_PROMPT = """You are Nexus 🎓, a friendly and knowledgeable campus assistant for university students.
 
 Your role is to help students navigate campus life efficiently so they can focus on what truly matters: learning.
 
@@ -280,7 +280,7 @@ def main():
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
 
     print("=" * 60)
-    print("🎓 UniBot – Your Campus Assistant")
+    print("🎓 Nexus – Your Campus Assistant")
     print("   Built with Azure AI Foundry + AI Toolkit")
     print("=" * 60)
     print("Ask me about class schedules, fees, registration, or campus services!")
@@ -296,11 +296,11 @@ def main():
         if not user_input:
             continue
         if user_input.lower() in ("quit", "exit", "bye"):
-            print("\n👋 Good luck with your studies! UniBot is always here to help.")
+            print("\n👋 Good luck with your studies! Nexus is always here to help.")
             break
 
         response = chat(openai_client, model, messages, user_input)
-        print(f"\n🤖 UniBot: {response}\n")
+        print(f"\n🤖 Nexus: {response}\n")
 
 
 if __name__ == "__main__":
