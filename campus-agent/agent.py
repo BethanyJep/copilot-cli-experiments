@@ -5,6 +5,7 @@ Helps students navigate campus life using tool-calling and prompt engineering.
 
 import os
 import json
+import logging
 from dotenv import load_dotenv
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
@@ -20,6 +21,13 @@ from tools import (
 )
 
 load_dotenv()
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%H:%M:%S",
+)
+logger = logging.getLogger("nexus.agent")
 
 # --- System Prompt (Prompt Engineering) ---
 SYSTEM_PROMPT = """You are Nexus 🎓, a friendly and knowledgeable campus assistant for university students.
@@ -231,6 +239,9 @@ def create_client():
 def chat(openai_client, model: str, messages: list, user_input: str) -> str:
     """Send a message and handle the tool-calling loop."""
 
+    logger.info("─" * 50)
+    logger.info("📨 User query: %s", user_input)
+
     messages.append({"role": "user", "content": user_input})
 
     # Call the model with tools
@@ -242,15 +253,31 @@ def chat(openai_client, model: str, messages: list, user_input: str) -> str:
     )
 
     assistant_message = response.choices[0].message
+    round_num = 0
 
     # Tool-calling loop: the agent may call multiple tools before responding
     while assistant_message.tool_calls:
+        round_num += 1
+        logger.info("🔁 Tool-calling round %d — %d tool(s) requested", round_num, len(assistant_message.tool_calls))
+
         # Add assistant's message with tool calls
         messages.append(assistant_message)
 
         # Execute each tool call
         for tool_call in assistant_message.tool_calls:
+            fn_name = tool_call.function.name
+            fn_args = json.loads(tool_call.function.arguments)
+            logger.info("  🔧 Tool called : %s", fn_name)
+            logger.info("     Arguments   : %s", json.dumps(fn_args))
+
             result = execute_tool_call(tool_call)
+
+            try:
+                parsed = json.loads(result)
+                logger.info("     Result data : %s", json.dumps(parsed, indent=2))
+            except (json.JSONDecodeError, TypeError):
+                logger.info("     Result data : %s", result)
+
             messages.append({
                 "role": "tool",
                 "tool_call_id": tool_call.id,
@@ -268,6 +295,8 @@ def chat(openai_client, model: str, messages: list, user_input: str) -> str:
 
     # Final text response
     messages.append({"role": "assistant", "content": assistant_message.content})
+    logger.info("✅ Final response generated (no further tool calls)")
+    logger.info("─" * 50)
     return assistant_message.content
 
 
