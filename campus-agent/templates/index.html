@@ -12,6 +12,7 @@
         <header>
             <h1>🎓 Nexus</h1>
             <p class="subtitle">Your AI Campus Assistant – Built with Microsoft Foundry</p>
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
         </header>
 
         <div class="chat-container" id="chatContainer">
@@ -154,6 +155,28 @@
             const container = document.getElementById('logEntries');
             container.innerHTML = '<p class="log-placeholder">Logs will appear here when you send a query...</p>';
         }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isLight = html.getAttribute('data-theme') === 'light';
+            if (isLight) {
+                html.removeAttribute('data-theme');
+                document.getElementById('themeToggle').innerHTML = '🌙 Dark';
+                localStorage.setItem('nexus-theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                document.getElementById('themeToggle').innerHTML = '☀️ Light';
+                localStorage.setItem('nexus-theme', 'light');
+            }
+        }
+
+        // Restore saved theme on load
+        (function () {
+            if (localStorage.getItem('nexus-theme') === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.getElementById('themeToggle').innerHTML = '☀️ Light';
+            }
+        })();
 
         userInput.focus();
     </script>

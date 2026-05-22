@@ -32,6 +32,7 @@ body {
 header {
     text-align: center;
     padding: 20px 0;
+    position: relative;
 }
 
 header h1 {
@@ -273,3 +274,106 @@ header h1 {
 .log-entry.log-result { border-left-color: #4caf50; color: #4caf50; }
 .log-entry.log-final  { border-left-color: #69f0ae; color: #69f0ae; font-weight: 600; }
 .log-entry.log-error  { border-left-color: #f44336; color: #f44336; }
+
+/* ── Theme Toggle ──────────────────────────────────────── */
+
+.theme-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ccc;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+/* ── Light Mode Overrides ────────────────────────────── */
+
+[data-theme="light"] body {
+    background: linear-gradient(135deg, #e8f4fd 0%, #dbeeff 50%, #c8e6ff 100%);
+    color: #1a1a2e;
+}
+
+[data-theme="light"] header h1       { color: #0078d4; }
+[data-theme="light"] .subtitle        { color: #555; }
+
+[data-theme="light"] .chat-container {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .message.bot .message-content {
+    background: rgba(0, 120, 212, 0.07);
+    border-color: rgba(0, 120, 212, 0.2);
+}
+
+[data-theme="light"] .message.user .message-content {
+    background: rgba(80, 80, 220, 0.08);
+    border-color: rgba(80, 80, 220, 0.2);
+}
+
+[data-theme="light"] .message-content strong              { color: #0078d4; }
+[data-theme="light"] .message.user .message-content strong { color: #5050cc; }
+
+[data-theme="light"] .quick-actions button {
+    border-color: rgba(0, 120, 212, 0.35);
+    background:   rgba(0, 120, 212, 0.07);
+    color: #0078d4;
+}
+
+[data-theme="light"] .quick-actions button:hover {
+    background:   rgba(0, 120, 212, 0.15);
+    border-color: rgba(0, 120, 212, 0.5);
+}
+
+[data-theme="light"] .input-area input {
+    border-color: rgba(0, 0, 0, 0.15);
+    background:   rgba(255, 255, 255, 0.85);
+    color: #1a1a2e;
+}
+
+[data-theme="light"] .input-area input:focus  { border-color: #0078d4; }
+
+[data-theme="light"] .input-area button       { background: #0078d4; color: #fff; }
+[data-theme="light"] .input-area button:hover { background: #005fa3; }
+
+[data-theme="light"] .log-header {
+    background:   rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #555;
+}
+
+[data-theme="light"] .log-clear-btn            { border-color: rgba(0,0,0,0.15); color: #666; }
+[data-theme="light"] .log-clear-btn:hover       { border-color: rgba(0,0,0,0.3);  color: #333; }
+
+[data-theme="light"] .log-entries {
+    background:   rgba(255, 255, 255, 0.75);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .log-placeholder { color: #aaa; }
+[data-theme="light"] .log-entry        { background: rgba(0, 0, 0, 0.03); }
+[data-theme="light"] .log-time         { color: #aaa; }
+[data-theme="light"] .log-detail       { background: rgba(0,0,0,0.05); color: #555; }
+
+[data-theme="light"] .theme-toggle {
+    background:   rgba(0, 0, 0, 0.07);
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #444;
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.12);
+    color: #111;
+}
